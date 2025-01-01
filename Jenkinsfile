@@ -1,17 +1,14 @@
 pipeline {
     agent any
-
     tools {
         maven 'sonarmaven'
-        jdk 'JAVA_HOME'  // Ensure that JDK 17 is configured in Jenkins tools
+        jdk 'JAVA_HOME'  
     }
-
     environment {
-        MAVEN_PATH = 'C:\\Users\\prabh\\Downloads\\apache-maven-3.9.9\\bin'  // Adjust the Maven path for Windows
-        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'  // Set the correct JAVA_HOME path for Windows
-        SONAR_TOKEN = credentials('sonar-token')  // Use Jenkins credentials for the token
+        MAVEN_PATH = 'C:\\Users\\prabh\\Downloads\\apache-maven-3.9.9\\bin' 
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17' 
+        SONAR_TOKEN = credentials('sonar-token') 
     }
-
     stages {
         stage('Checkout') {
             steps {
