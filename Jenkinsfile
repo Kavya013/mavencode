@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'sonarmaven'
-        jdk 'JDK 17'  // Ensure that JDK 17 is configured in Jenkins tools
+        jdk 'JAVA_HOME'  // Ensure that JDK 17 is configured in Jenkins tools
     }
 
     environment {
