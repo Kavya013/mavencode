@@ -26,9 +26,8 @@ pipeline {
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=mavencode ^
                         -Dsonar.sources=src/main/java,src/test/java ^
-                        -Dsonar.exclusions=**/AppTest.java ^
                         -Dsonar.host.url=http://localhost:9000 ^
-                        -Dsonar.login=%SONAR_TOKEN%
+                        -Dsonar.token=%SONAR_TOKEN%
                     """
                 }
             }
