@@ -27,7 +27,7 @@ pipeline {
                     set PATH=%SONAR_SCANNER_PATH%;%PATH%
                     where sonar-scanner || echo "SonarQube scanner not found. Please install it."
                         mvn sonar:sonar ^
-                        -Dsonar.projectKey=mavencode ^
+                        -Dsonar.projectKey=mavencode1 ^
                         -Dsonar.sources=src/main/java,src/test/java ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.token=%SONAR_TOKEN%
