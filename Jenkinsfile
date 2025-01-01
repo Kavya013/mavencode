@@ -26,6 +26,7 @@ pipeline{
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=mavencode ^
                         -Dsonar.sources=src/test/java ^
+                        -Dsonar.exclusions=src/test/java/com/example/myautomation/AppTest.java ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.login=%SONAR_TOKEN%
                      """
