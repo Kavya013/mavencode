@@ -24,7 +24,7 @@ pipeline{
                 withSonarQubeEnv('sonarqube') {
                      bat """
                         mvn sonar:sonar ^
-                        -Dsonar.projectKey=maven ^
+                        -Dsonar.projectKey=mavencode ^
                         -Dsonar.sources=src/test/java ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.login=%SONAR_TOKEN%
