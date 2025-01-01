@@ -12,9 +12,9 @@ public class LoginAutomationTest {
         WebDriver driver = new ChromeDriver();
         try {
             driver.get("https://www.saucedemo.com/");
-            WebElement usernameField = driver.findElement(By.id("username"));
+            WebElement usernameField = driver.findElement(By.id("user-name"));
             WebElement passwordField = driver.findElement(By.id("password"));
-            WebElement loginButton = driver.findElement(By.id("loginButton"));
+            WebElement loginButton = driver.findElement(By.id("login-button"));
             usernameField.sendKeys("standard_user");
             passwordField.sendKeys("secret_sauce");
             loginButton.click();
