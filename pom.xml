@@ -12,6 +12,9 @@
         <sonar.projectKey>maven-automation-project</sonar.projectKey>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+
+        <sonar.sources>src/test/java</sonar.sources>
+        <sonar.exclusions>**/AppTest.java</sonar.exclusions>
     </properties>
 
     <dependencies>
