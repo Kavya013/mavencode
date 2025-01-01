@@ -1,44 +1,44 @@
-pipeline{
-   agent any
-   tools{
-       maven 'sonarmaven'
-   }
-   environment{
-        SONAR_TOKEN= credentials('sonar-token')
-        JAVA_HOME='C:\\Program Files\\Java\\jdk-17'
-        PATH= "${JAVA_HOME}\\bin;${env.PATH}"
+pipeline {
+    agent any
+    tools {
+        maven 'sonarmaven'
     }
-    stages{
-        stage('Checkout'){
-            steps{
-                 checkout scm
-             }
-         }
-        stage('Build'){
-             steps{
-                    bat 'mvn clean package'
-              }
-         }
-         stage('SonarQube Analysis'){
-              steps{
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
+        PATH = "${JAVA_HOME}\\bin;${env.PATH}"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
                 withSonarQubeEnv('sonarqube') {
-                     bat """
+                    bat """
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=mavencode ^
-                        -Dsonar.sources=src/test/java ^
-                        -Dsonar.exclusions=src/test/java/com/example/myautomation/AppTest.java ^
+                        -Dsonar.sources=src/main/java,src/test/java ^
+                        -Dsonar.exclusions=**/AppTest.java ^
                         -Dsonar.host.url=http://localhost:9000 ^
                         -Dsonar.login=%SONAR_TOKEN%
-                     """
-                 }
-              }
-         }
+                    """
+                }
+            }
+        }
     }
-    post{
-        success{
+    post {
+        success {
             echo 'Pipeline completed successfully.'
         }
-        failure{
+        failure {
             echo 'Pipeline failed.'
         }
     }

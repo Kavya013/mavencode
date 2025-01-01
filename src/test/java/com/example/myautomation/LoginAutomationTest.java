@@ -1,10 +1,10 @@
 package com.example.myautomation;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LoginAutomationTest {
     @Test
     public void testLogin() {
@@ -12,19 +12,21 @@ public class LoginAutomationTest {
         WebDriver driver = new ChromeDriver();
         try {
             driver.get("https://www.saucedemo.com/");
-            WebElement usernameField = driver.findElement(By.id("user-name"));
-            WebElement passwordField = driver.findElement(By.id("password"));
-            WebElement loginButton = driver.findElement(By.id("login-button"));
-            usernameField.sendKeys("standard_user");
-            passwordField.sendKeys("secret_sauce");
-            loginButton.click();
+            
+            // Create an instance of LoginPage
+            LoginPage loginPage = new LoginPage(driver);
+            
+            // Perform login actions
+            loginPage.enterUsername("standard_user");
+            loginPage.enterPassword("secret_sauce");
+            loginPage.clickLogin();
+            
+            // Validate the page title after login
             String expectedTitle = "Swag Labs";
-            String actualTitle = driver.getTitle();
+            String actualTitle = loginPage.getPageTitle();
             assertEquals(expectedTitle, actualTitle);
         } finally {
             driver.quit();
         }
     }
 }
-
-

@@ -9,16 +9,12 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <sonar.projectKey>maven-automation-project</sonar.projectKey>
+        <sonar.projectKey>mavencode</sonar.projectKey>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.login>${env.SONAR_TOKEN}</sonar.login>
-
-        <sonar.sources>src/test/java</sonar.sources>
-        <sonar.exclusions>**/AppTest.java</sonar.exclusions>
     </properties>
 
     <dependencies>
-        <!-- JUnit 5 dependency for testing -->
+        <!-- JUnit 5 dependency -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -26,7 +22,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium WebDriver dependency for automation -->
+        <!-- Selenium WebDriver dependency -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
