@@ -2,12 +2,12 @@ pipeline {
     agent any
     tools {
         maven 'sonarmaven'
-        jdk 'JAVA_HOME'  
+        jdk 'JAVA_HOME'
     }
     environment {
-        MAVEN_PATH = 'C:\\Users\\prabh\\Downloads\\apache-maven-3.9.9\\bin' 
-        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17' 
-        SONAR_TOKEN = credentials('sonar-token') 
+        MAVEN_PATH = 'C:\\Users\\prabh\\Downloads\\apache-maven-3.9.9\\bin'
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
+        SONAR_TOKEN = credentials('sonar-token')
     }
     stages {
         stage('Checkout') {
@@ -15,7 +15,6 @@ pipeline {
                 checkout scm
             }
         }
-
         stage('Clean target folder') {
             steps {
                 echo 'Cleaning target directory...'
@@ -24,16 +23,14 @@ pipeline {
                 '''
             }
         }
-
         stage('Test') {
             steps {
-                echo 'Testing the project...'
+                echo 'Testing the project and generating JaCoCo report...'
                 bat '''
-                "%MAVEN_PATH%\\mvn" test
+                "%MAVEN_PATH%\\mvn" test jacoco:report
                 '''
             }
         }
-
         stage('Package') {
             steps {
                 echo 'Packaging the compiled code...'
@@ -42,7 +39,6 @@ pipeline {
                 '''
             }
         }
-
         stage('SonarQube Analysis') {
             steps {
                 echo 'Running SonarQube analysis...'
@@ -55,8 +51,13 @@ pipeline {
                 '''
             }
         }
+        stage('Archive JaCoCo Reports') {
+            steps {
+                echo 'Archiving JaCoCo report...'
+                archiveArtifacts artifacts: 'target/site/jacoco/index.html', allowEmptyArchive: true
+            }
+        }
     }
-
     post {
         success {
             echo 'Pipeline completed successfully.'
